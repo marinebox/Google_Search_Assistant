@@ -1,0 +1,13 @@
+{
+  "name": "Google_Search_Assistant",
+  "description": "__MSG_app_description__",
+  "version": "0.0.1",
+  "default_locale": "en",
+  "manifest_version": 3,
+
+  "action": {
+    "default_title": "Google Search Assistant",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["tabs"]
+}
