@@ -16,15 +16,30 @@ const getCurrentTabURL = () => {
   });
 };
 
-const executeGoogleSearch = ()=>{
-  document.getElementById('search_test').addEventListener('click', ()=>{
-    const query = document.getElementById('test_input').value;
+const executeGoogleSearch = () => {
+  document.getElementById('search_test').addEventListener('click', () => {
+    let query = '';
+    let queryAND = document.getElementById('and_search').value;
+    let queryOR = document.getElementById('or_search').value;
     let url = new URL('https://www.google.com/search');
-    url.searchParams.set('q', query);
-    chrome.tabs.create({url: url.href})
+    if (queryAND.length > 0) {
+      query += queryAND.replace(/\s/g, ' + ');
+      query += ' ';
+      // url.searchParams.set('q', queryAND);
+    }
+    if (queryOR.length > 0) {
+      query += queryOR.replace(/\s/g, ' OR ');
+      query += ' ';
+      console.log(query);
+      // url.searchParams.set('q', queryOR);
+    }
+    if (query.length > 0) {
+      url.searchParams.set('q', query);
+    }
+    chrome.tabs.create({ url: url.href });
     console.log(url);
-  })
-}
+  });
+};
 
 getCurrentTabURL();
 executeGoogleSearch();
